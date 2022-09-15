@@ -1,3 +1,48 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content>
+      <ion-list id="inbox-list">
+        <ion-list-header >LHABScan</ion-list-header>
+      </ion-list>
+
+
+      <ion-list>
+
+        <ion-menu-toggle>
+          <ion-item >
+            <ion-label style="font-size: 17px;">
+                <ion-icon name="moon-outline" slot="start" style="font-size: 20px"></ion-icon>
+                Dark Mode
+            </ion-label>
+            <ion-toggle slot="end"(ionChange)='toggleTheme($event)'></ion-toggle>
+          </ion-item>
+      </ion-menu-toggle>
+      <br>
+        <ion-menu-toggle>
+          <ion-item routerDirection="root" routerLink="home" routerLinkActive="selected" color="clear">
+            <ion-label style="font-size: 17px;">
+                <ion-icon name="newspaper-outline" slot="start" style="font-size: 18px"></ion-icon>
+                Scanned Files
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <br>
+        <!--<ion-menu-toggle>
+          <ion-item routerDirection="root" routerLink="about-us" routerLinkActive="selected" color="clear">
+            <ion-label style="font-size: 17px;">
+                <ion-icon name="help-outline" slot="start" style="font-size: 20px"></ion-icon>
+                About Us
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>-->
+        
+        
+      </ion-list>
+
+      
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
 </ion-app>

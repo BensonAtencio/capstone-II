@@ -1,27 +1,47 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-title{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#menuButton{
+  size: 15px;
+  
 }
+ion-content{
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  ion-card{
+    margin: auto;
+    margin-top: 2%;
+    width: 90%;
 
-  color: #8c8c8c;
+  h2{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin-bottom: 2%;
+  }
 
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  #downloadBtn{
+    --background: #615d5d;//rgb(20, 60, 190);
+    margin: auto;
+    margin-bottom: 5px;
+    width: 30%;
+    font-size: 12px;
+    
+  
+  }
+  #deleteBtn{
+    --background: rgb(224, 144, 39);//rgb(38, 165, 238);
+    margin: auto;
+    width: 30%;
+    font-size: 12px;
+    margin-bottom: 3%;
+  }
+  }
+    
+  /*ion-card-content{
+    display: flex;
+    justify-content: center;
+  }*/
+  
 }
