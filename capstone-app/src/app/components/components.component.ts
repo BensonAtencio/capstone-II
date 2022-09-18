@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
-import { getDownloadURL , getStorage, ref, listAll } from "firebase/storage";
+import { getDownloadURL , getStorage, ref, listAll, deleteObject } from "firebase/storage";
 
 const app = initializeApp(environment.firebase);
 const storage = getStorage();
@@ -33,10 +33,24 @@ export class ComponentsComponent implements OnInit {
     }).catch((error) => {
       console.log(error)
     });
-    
+  }
+
+  download(){
+
     // getDownloadURL(storageRef).then((url) => {
     //   console.log(url);
     // })
+
+  }
+
+  delete(){
+
+    // deleteObject(storageRef).then(() => {
+    //   console.log('Deleted Successfully')
+    // }).catch((error) => {
+    //     console.log(error);
+    // });
+
   }
 
 }
