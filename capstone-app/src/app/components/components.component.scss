@@ -1,0 +1,35 @@
+
+ion-card{
+    margin: auto;
+    margin-top: 2%;
+    width: 90%;
+
+h2{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+#downloadBtn{
+    --background: #615d5d;//rgb(20, 60, 190);
+    margin: auto;
+    margin-bottom: 5px;
+    width: 30%;
+    font-size: 12px;
+    
+
+}
+#deleteBtn{
+    --background: rgb(224, 144, 39);//rgb(38, 165, 238);
+    margin: auto;
+    width: 30%;
+    font-size: 12px;
+    margin-bottom: 3%;
+}
+}
+    
+/*ion-card-content{
+    display: flex;
+    justify-content: center;
+}*/
