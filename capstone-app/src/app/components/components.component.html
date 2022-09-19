@@ -1,4 +1,4 @@
-<ion-card *ngFor="let filename of files; let i = index">
+<ion-card *ngFor="let filename of files">
   <ion-card-content>
     <h2>{{filename}}</h2>
     <ion-button id="downloadBtn" shape="round" expand="block" (click)="download(filename)">Download</ion-button>

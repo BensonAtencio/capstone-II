@@ -6,7 +6,7 @@ import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 const app = initializeApp(environment.firebase);
-const storage = getStorage();
+const storage = getStorage(app);
 const storageRef = ref(storage, 'files/');
 
 @Component({
@@ -43,15 +43,17 @@ export class ComponentsComponent implements OnInit {
     const downloadRef = ref(storage, `files/${name}`) 
     getDownloadURL(downloadRef).then(async (url) => {
 
-      // const xhr = new XMLHttpRequest();
-      // xhr.responseType = 'blob';
-      // xhr.onload = (event) => {
-      //   const blob = xhr.response;
-      // };
-      // xhr.open('GET', url);
-      // xhr.send()
       this.load();
-      this.toast('Download will start shortly', 'success');
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = (event) => {
+        const blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send()
+
+      this.toast('Downloading...', 'success');
+      // // window.open(url);
       console.log(url);
   })
   .catch((error) => {
@@ -65,13 +67,12 @@ export class ComponentsComponent implements OnInit {
 
     const deleteRef = ref(storage, `files/${name}`);
       deleteObject(deleteRef).then(async () => {
-      this.load();
-      this.toast('Deleted Successfully', 'success');
+        this.load();
+        this.toast('Deleted Successfully', 'success');
     }).catch((error) => {
-      console.log(error);
+        console.log(error);
     });
 
-    
   }
 
   async toast(message, status){
