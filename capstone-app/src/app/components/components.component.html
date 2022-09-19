@@ -1,11 +1,9 @@
-<ion-card>
-
+<ion-card *ngFor="let filename of files; let i = index">
   <ion-card-content>
-    <h2>{{files}}</h2>
-    <ion-button id="downloadBtn" shape="round" expand="block">Download</ion-button>
-    <ion-button id="deleteBtn" shape="round" expand="block">Delete</ion-button>
+    <h2>{{filename}}</h2>
+    <ion-button id="downloadBtn" shape="round" expand="block" (click)="download(filename)">Download</ion-button>
+    <ion-button id="deleteBtn" shape="round" expand="block" (click)="deletefile(filename)">Delete</ion-button>
   </ion-card-content>
-  
 </ion-card>
 
 <!-- <ion-card>

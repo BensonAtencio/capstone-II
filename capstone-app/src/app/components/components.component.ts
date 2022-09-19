@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL , getStorage, ref, listAll, deleteObject } from "firebase/storage";
+import { ToastController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 const app = initializeApp(environment.firebase);
 const storage = getStorage();
@@ -14,43 +16,83 @@ const storageRef = ref(storage, 'files/');
 })
 export class ComponentsComponent implements OnInit {
 
-  public files: any;
+  public files: any[] = [];
 
-  constructor() { }
+  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public router: Router) { }
 
   ngOnInit() {
-    this.test()
+    this.list()
   }
 
-  test(){
+  list(){
 
     listAll(storageRef)
     .then((res) => {
       res.items.forEach((itemRef) => {
-        this.files = itemRef['name'];
-        console.log(itemRef);
+        this.files.push(itemRef.name);
+        // this.files = Array.of(itemRef);
+        // console.log(this.files);
       });
     }).catch((error) => {
       console.log(error)
     });
   }
 
-  download(){
+  download(name){
 
-    // getDownloadURL(storageRef).then((url) => {
-    //   console.log(url);
-    // })
+    const downloadRef = ref(storage, `files/${name}`) 
+    getDownloadURL(downloadRef).then(async (url) => {
+
+      // const xhr = new XMLHttpRequest();
+      // xhr.responseType = 'blob';
+      // xhr.onload = (event) => {
+      //   const blob = xhr.response;
+      // };
+      // xhr.open('GET', url);
+      // xhr.send()
+      this.load();
+      this.toast('Download will start shortly', 'success');
+      console.log(url);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+   
 
   }
 
-  delete(){
+  deletefile(name){
 
-    // deleteObject(storageRef).then(() => {
-    //   console.log('Deleted Successfully')
-    // }).catch((error) => {
-    //     console.log(error);
-    // });
+    const deleteRef = ref(storage, `files/${name}`);
+      deleteObject(deleteRef).then(async () => {
+      this.load();
+      this.toast('Deleted Successfully', 'success');
+    }).catch((error) => {
+      console.log(error);
+    });
 
+    
+  }
+
+  async toast(message, status){
+    const toast = await this.toastCtrl.create({
+      message: message,
+      color: status,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.present();
+  }
+
+  async load() {
+    const loading = await this.loadingCtrl.create({
+      duration: 2000,
+      spinner: 'circles',
+      showBackdrop: true
+    });
+
+    loading.present();
   }
 
 }
