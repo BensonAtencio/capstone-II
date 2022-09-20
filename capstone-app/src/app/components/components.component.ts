@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 
 const app = initializeApp(environment.firebase);
 const storage = getStorage(app);
-const storageRef = ref(storage, 'files/');
 
 @Component({
   selector: 'app-components',
@@ -26,6 +25,7 @@ export class ComponentsComponent implements OnInit {
 
   list(){
 
+    const storageRef = ref(storage, 'files/');
     listAll(storageRef)
     .then((res) => {
       res.items.forEach((itemRef) => {
@@ -40,21 +40,31 @@ export class ComponentsComponent implements OnInit {
 
   download(name){
 
-    const downloadRef = ref(storage, `files/${name}`) 
-    getDownloadURL(downloadRef).then(async (url) => {
+    // const downloadRef = ref(storage, `files/${name}`) 
+    const gsReference = ref(storage, `gs://capstone-ii-1838a.appspot.com/files/${name}`);
+    
+    getDownloadURL(gsReference).then(async (url) => {
 
       this.load();
       const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
       xhr.responseType = 'blob';
+      xhr.send()
       xhr.onload = (event) => {
         const blob = xhr.response;
+        
+        let a = document.createElement("a");
+          document.body.appendChild(a);
+          let downurl = window.URL.createObjectURL(blob);
+          a.href = downurl;
+          a.download = `${name}`;
+          a.click();
+          
       };
-      xhr.open('GET', url);
-      xhr.send()
 
       this.toast('Downloading...', 'success');
-      // // window.open(url);
-      console.log(url);
+      // window.open(url);
+      // console.log(url);
   })
   .catch((error) => {
     console.log(error);
