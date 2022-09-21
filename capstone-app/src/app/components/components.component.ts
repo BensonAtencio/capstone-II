@@ -76,11 +76,15 @@ export class ComponentsComponent implements OnInit {
   deletefile(name){
 
     const deleteRef = ref(storage, `files/${name}`);
-      deleteObject(deleteRef).then(async () => {
-        this.load();
-        this.toast('Deleted Successfully', 'success');
-    }).catch((error) => {
-        console.log(error);
+    deleteObject(deleteRef).then(async () => {
+      this.load();
+      this.toast('Deleted Successfully', 'success');
+      setTimeout(function(){
+        window.location.reload();
+      },3050)
+    })
+    .catch((error) => {
+      console.log(error);
     });
 
   }
