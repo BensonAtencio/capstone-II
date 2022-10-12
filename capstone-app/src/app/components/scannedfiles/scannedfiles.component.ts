@@ -9,11 +9,11 @@ const app = initializeApp(environment.firebase);
 const storage = getStorage(app);
 
 @Component({
-  selector: 'app-components',
-  templateUrl: './components.component.html',
-  styleUrls: ['./components.component.scss'],
+  selector: 'app-scannedfiles',
+  templateUrl: './scannedfiles.component.html',
+  styleUrls: ['./scannedfiles.component.scss'],
 })
-export class ComponentsComponent implements OnInit {
+export class ScannedfilesComponent implements OnInit {
 
   public files: any[] = [];
 
@@ -109,5 +109,4 @@ export class ComponentsComponent implements OnInit {
 
     loading.present();
   }
-
 }
