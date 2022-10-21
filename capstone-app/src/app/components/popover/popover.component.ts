@@ -4,35 +4,25 @@ import { initializeApp } from "firebase/app";
 import { getDownloadURL , getStorage, ref, listAll, deleteObject } from "firebase/storage";
 import { ToastController, LoadingController, PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { PopoverComponent } from '../popover/popover.component';
+
 
 const app = initializeApp(environment.firebase);
 const storage = getStorage(app);
 
 @Component({
-  selector: 'app-scannedfiles',
-  templateUrl: './scannedfiles.component.html',
-  styleUrls: ['./scannedfiles.component.scss'],
+  selector: 'app-popover',
+  templateUrl: './popover.component.html',
+  styleUrls: ['./popover.component.scss'],
 })
-export class ScannedfilesComponent implements OnInit {
+export class PopoverComponent implements OnInit {
 
   public files: any[] = [];
 
-  myToast: any;
-
   constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public router: Router,
-              public popoverController : PopoverController) { }
+              public popoverController: PopoverController) { }
 
   ngOnInit() {
     this.list()
-  }
-
-  async popclick(event){
-    const popover = await this.popoverController.create({
-      component: PopoverComponent, 
-      event
-    });
-    return await popover.present();
   }
 
   list(){
@@ -48,6 +38,10 @@ export class ScannedfilesComponent implements OnInit {
     }).catch((error) => {
       console.log(error)
     });
+  }
+
+  close() {
+    this.popoverController.dismiss();
   }
 
   download(name){
@@ -122,3 +116,4 @@ export class ScannedfilesComponent implements OnInit {
     loading.present();
   }
 }
+

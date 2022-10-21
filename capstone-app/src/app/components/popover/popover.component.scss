@@ -1,0 +1,36 @@
+#downloadBtn{
+    --background: #615d5d;//rgb(20, 60, 190);
+    margin: auto;
+    margin-bottom: 5px;
+    width: 100%;
+    height: 70%;
+    font-size: 12px;
+    
+
+}
+#deleteBtn{
+    --background: rgb(224, 144, 39);//rgb(38, 165, 238);
+    margin: auto;
+    width: 100%;
+    height: 70%;
+    font-size: 12px;
+    margin-bottom: 3%;
+}
+
+#viewBtn{
+    --background: #615d5d;//rgb(38, 165, 238);
+    margin: auto;
+    width: 100%;
+    height: 70%;
+    font-size: 12px;
+    margin-bottom: 3%;
+}
+
+#closeBtn{
+    --background: rgb(224, 144, 39);//rgb(38, 165, 238);
+    margin: auto;
+    width: 100%;
+    height: 70%;
+    font-size: 12px;
+    margin-bottom: 3%;
+}
