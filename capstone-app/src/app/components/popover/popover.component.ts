@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL , getStorage, ref, listAll, deleteObject } from "firebase/storage";
-import { ToastController, LoadingController, PopoverController } from '@ionic/angular';
+import { ToastController, LoadingController, PopoverController, NavParams } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 
@@ -18,26 +18,12 @@ export class PopoverComponent implements OnInit {
 
   public files: any[] = [];
 
-  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public router: Router,
-              public popoverController: PopoverController) { }
+  fname: any;
+
+  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public router: Router, public popoverController: PopoverController, private navParams: NavParams) { }
 
   ngOnInit() {
-    this.list()
-  }
-
-  list(){
-
-    const storageRef = ref(storage, 'files/');
-    listAll(storageRef)
-    .then((res) => {
-      res.items.forEach((itemRef) => {
-        this.files.push(itemRef.name);
-        // this.files = Array.of(itemRef);
-        // console.log(this.files);
-      });
-    }).catch((error) => {
-      console.log(error)
-    });
+    this.fname = this.navParams.get('fname');
   }
 
   close() {

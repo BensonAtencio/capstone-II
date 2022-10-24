@@ -27,9 +27,12 @@ export class ScannedfilesComponent implements OnInit {
     this.list()
   }
 
-  async popclick(event){
+  async popclick(event, name){
     const popover = await this.popoverController.create({
       component: PopoverComponent, 
+      componentProps: {
+        fname: name
+      },
       event
     });
     return await popover.present();
@@ -50,56 +53,56 @@ export class ScannedfilesComponent implements OnInit {
     });
   }
 
-  download(name){
+  // download(name){
 
-    // const downloadRef = ref(storage, `files/${name}`) 
-    const gsReference = ref(storage, `gs://capstone-ii-1838a.appspot.com/files/${name}`);
+  //   // const downloadRef = ref(storage, `files/${name}`) 
+  //   const gsReference = ref(storage, `gs://capstone-ii-1838a.appspot.com/files/${name}`);
     
-    getDownloadURL(gsReference).then(async (url) => {
+  //   getDownloadURL(gsReference).then(async (url) => {
 
-      this.load();
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', url, true);
-      xhr.responseType = 'blob';
-      xhr.send()
-      xhr.onload = (event) => {
-        const blob = xhr.response;
+  //     this.load();
+  //     const xhr = new XMLHttpRequest();
+  //     xhr.open('GET', url, true);
+  //     xhr.responseType = 'blob';
+  //     xhr.send()
+  //     xhr.onload = (event) => {
+  //       const blob = xhr.response;
         
-        let a = document.createElement("a");
-          document.body.appendChild(a);
-          let downurl = window.URL.createObjectURL(blob);
-          a.href = downurl;
-          a.download = `${name}`;
-          a.click();
+  //       let a = document.createElement("a");
+  //         document.body.appendChild(a);
+  //         let downurl = window.URL.createObjectURL(blob);
+  //         a.href = downurl;
+  //         a.download = `${name}`;
+  //         a.click();
           
-      };
+  //     };
 
-      this.toast('Downloading...', 'success');
-      // window.open(url);
-      // console.log(url);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+  //     this.toast('Downloading...', 'success');
+  //     // window.open(url);
+  //     // console.log(url);
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
    
 
-  }
+  // }
 
-  deletefile(name){
+  // deletefile(name){
 
-    const deleteRef = ref(storage, `files/${name}`);
-    deleteObject(deleteRef).then(async () => {
-      this.load();
-      this.toast('Deleted Successfully', 'success');
-      setTimeout(function(){
-        window.location.reload();
-      },3050)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  //   const deleteRef = ref(storage, `files/${name}`);
+  //   deleteObject(deleteRef).then(async () => {
+  //     this.load();
+  //     this.toast('Deleted Successfully', 'success');
+  //     setTimeout(function(){
+  //       window.location.reload();
+  //     },3050)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
-  }
+  // }
 
   async toast(message, status){
     const toast = await this.toastCtrl.create({
