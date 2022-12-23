@@ -1,6 +1,6 @@
 # capstone-II
 
-#3D Scanner Based on Point Cloud Data Acquisition
+3D Scanner Based on Point Cloud Data Acquisition
 
 Application for Capstone II
 
